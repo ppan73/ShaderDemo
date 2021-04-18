@@ -1,15 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ViewDragger : MonoBehaviour, IDragHandler, IBeginDragHandler
+public class ViewDragger : MonoBehaviour, IDragHandler, IBeginDragHandler, IScrollHandler
 {
     private Vector2 _lastPosition;
     private Transform _cameraTransform;
-    private float _rotateScale = 0.4f;
-    private float _translateScale = 0.01f;
+    private float _rotateScale = 0.8f;
+    private float _translateScale = 0.005f;
+    private float _zoomScale = 0.05f;
     
     private void Awake()
     {
@@ -21,11 +23,17 @@ public class ViewDragger : MonoBehaviour, IDragHandler, IBeginDragHandler
         _lastPosition = eventData.position;
     }
 
+    public void OnScroll(PointerEventData pointerEventData)
+    {
+        //zoom
+        _cameraTransform.position = _cameraTransform.position + _cameraTransform.forward * pointerEventData.scrollDelta.y * _zoomScale;
+    }
+    
     public void OnDrag(PointerEventData pointerEventData)
     {
         Vector2 deltaPosition = pointerEventData.position - _lastPosition;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (pointerEventData.button == PointerEventData.InputButton.Right)
         {
             //rotate
             _cameraTransform.RotateAround(Vector3.zero, _cameraTransform.right, -deltaPosition.y * _rotateScale);
@@ -41,17 +49,16 @@ public class ViewDragger : MonoBehaviour, IDragHandler, IBeginDragHandler
         else
         {
             //translate
-            Vector3 currentCameraPosition = _cameraTransform.position;
-            Vector3 newPosition;
-            if (Input.GetKey(KeyCode.LeftShift))
+            _cameraTransform.position -= _cameraTransform.right * deltaPosition.x * _translateScale;
+            if (pointerEventData.button == PointerEventData.InputButton.Middle)
             {
-                newPosition = new Vector3(currentCameraPosition.x - deltaPosition.x * _translateScale, currentCameraPosition.y, currentCameraPosition.z - deltaPosition.y * _translateScale);
+                //zoom
+                _cameraTransform.position -= _cameraTransform.forward * deltaPosition.y * _translateScale;
             }
             else
             {
-                newPosition = new Vector3(currentCameraPosition.x - deltaPosition.x * _translateScale, currentCameraPosition.y - deltaPosition.y * _translateScale, currentCameraPosition.z);
+                _cameraTransform.position -= _cameraTransform.up * deltaPosition.y * _translateScale;
             }
-            _cameraTransform.position = newPosition;
         }
 
         _lastPosition = pointerEventData.position;
