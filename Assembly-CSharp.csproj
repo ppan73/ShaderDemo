@@ -58,6 +58,7 @@
      <None Include="Assets\Resources\Shaders\Normals.shader" />
      <None Include="Assets\Resources\Shaders\SimpleDiffuse.shader" />
      <None Include="Assets\Resources\Shaders\CheckerBoard.shader" />
+     <None Include="Assets\SkySerie Freebie\Hdri setup.txt" />
      <None Include="Assets\Resources\Shaders\ReflectionPerPixel.shader" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.2.2f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
