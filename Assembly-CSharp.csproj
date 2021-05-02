@@ -53,13 +53,19 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\ButtonsPanel.cs" />
+     <Compile Include="Assets\Scripts\ComputeShader\ComputeShaderDemo.cs" />
      <Compile Include="Assets\Scripts\ViewDragger.cs" />
+     <None Include="Assets\Resources\Shaders\Geometry.shader" />
      <None Include="Assets\Resources\Shaders\Triplanar.shader" />
      <None Include="Assets\AmplifyShaders\Amplify.shader" />
      <None Include="Assets\Resources\Shaders\Normals.shader" />
      <None Include="Assets\Resources\Shaders\SimpleDiffuse.shader" />
+     <None Include="Assets\Scripts\ComputeShader\ComputeShader.compute" />
+     <None Include="Assets\Resources\Shaders\Tesselation.shader" />
      <None Include="Assets\Resources\Shaders\CheckerBoard.shader" />
      <None Include="Assets\Resources\Shaders\Amplify2.shader" />
+     <None Include="Assets\Resources\Shaders\PhongTessalation.shader" />
+     <None Include="Assets\Scripts\ComputeShader\Random.cginc" />
      <None Include="Assets\SkySerie Freebie\Hdri setup.txt" />
      <None Include="Assets\Resources\Shaders\ReflectionPerPixel.shader" />
  <Reference Include="UnityEngine">

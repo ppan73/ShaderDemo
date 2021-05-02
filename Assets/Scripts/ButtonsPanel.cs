@@ -14,7 +14,9 @@ public class ButtonsPanel : MonoBehaviour
     public Text shaderText;
     public Button resetViewButton;
     public Transform modelsFolder;
-
+    public Button computeShaderButton;
+    public ComputeShaderDemo computeShaderDemo;
+    
     public Material material;
     
     //private
@@ -36,12 +38,14 @@ public class ButtonsPanel : MonoBehaviour
         modelSelectButton.onClick.AddListener(HandleModelSelect);
         shaderSelectButton.onClick.AddListener(HandleShaderSelect);
         resetViewButton.onClick.AddListener(HandleResetView);
-
+        computeShaderButton.onClick.AddListener(HandleComputeShader);
+        
         //camera
         _initialCameraPosition = Camera.main.transform.position;
         _initialCameraRotation = Camera.main.transform.rotation;
         
         //get shaders
+        computeShaderDemo.Kill();
         _shaderList = Resources.LoadAll<Shader>("Shaders").ToList();
         
         //get models
@@ -104,5 +108,17 @@ public class ButtonsPanel : MonoBehaviour
     {
         Camera.main.transform.position = _initialCameraPosition;
         Camera.main.transform.rotation = _initialCameraRotation;
+    }
+
+    private void HandleComputeShader()
+    {
+        if (computeShaderDemo.gameObject.activeSelf)
+        {
+            computeShaderDemo.Kill();
+        }
+        else
+        {
+            computeShaderDemo.Init();
+        }
     }
 }
