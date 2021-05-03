@@ -5,60 +5,51 @@ using UnityEngine;
 
 public class ComputeShaderDemo : MonoBehaviour
 {
-    public int SphereAmount = 17;
     public ComputeShader Shader;
-    public GameObject Prefab;
+    public MeshRenderer meshRenderer;
 
-    ComputeBuffer resultBuffer;
-    int kernel;
-    uint threadGroupSize;
-    Vector3[] output;
+    private RenderTexture tex;
+    private int kernelHandle;
+    
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
 
-    private Transform[] instances;
+    struct VecMatPair
+    {
+        public Vector3 point;
+        public Matrix4x4 matrix;
+    }
+
     public void Init()
     {
         gameObject.SetActive(true);
-
-        //program we're executing
-        kernel = Shader.FindKernel("Spheres");
-        Shader.GetKernelThreadGroupSizes(kernel, out threadGroupSize, out _, out _);
-
-        //buffer on the gpu in the ram
-        resultBuffer = new ComputeBuffer(SphereAmount, sizeof(float) * 3);
-        output = new Vector3[SphereAmount];
         
-        instances = new Transform[SphereAmount];
-        for (int i = 0; i < SphereAmount; i++)
-        {
-            instances[i] = Instantiate(Prefab, transform).transform;
-        }
+        kernelHandle = Shader.FindKernel("Demo");
+
+        tex = new RenderTexture(256,256,24);
+        tex.enableRandomWrite = true;
+        tex.Create();
+
     }
 
     public void Kill()
     {
-        if (resultBuffer != null)
-        {
-            resultBuffer.Dispose();
-        }
         gameObject.SetActive(false);
     }
 
     void Update()
     {
         Shader.SetFloat("Time", Time.time);
-        Shader.SetBuffer(kernel, "Result", resultBuffer);
-        int threadGroups = (int) ((SphereAmount + (threadGroupSize - 1)) / threadGroupSize);
-        Shader.Dispatch(kernel, threadGroups, 1, 1);
-        resultBuffer.GetData(output);
+        Shader.SetTexture(kernelHandle, "Result", tex);
+        Shader.Dispatch(kernelHandle, 256 / 8, 256 / 8, 1);
 
-        for (int i = 0; i < instances.Length; i++)
-        {
-            instances[i].localPosition = output[i];
-        }
+        meshRenderer.material.mainTexture = tex;
     }
 
     void OnDestroy()
     {
-        resultBuffer.Dispose();
+        //resultBuffer.Dispose();
     }
 }

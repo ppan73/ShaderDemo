@@ -55,7 +55,6 @@
      <Compile Include="Assets\Scripts\ButtonsPanel.cs" />
      <Compile Include="Assets\Scripts\ComputeShader\ComputeShaderDemo.cs" />
      <Compile Include="Assets\Scripts\ViewDragger.cs" />
-     <None Include="Assets\Resources\Shaders\Geometry.shader" />
      <None Include="Assets\Resources\Shaders\Triplanar.shader" />
      <None Include="Assets\AmplifyShaders\Amplify.shader" />
      <None Include="Assets\Resources\Shaders\Normals.shader" />
