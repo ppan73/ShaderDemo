@@ -4,7 +4,6 @@ Shader "Demo/Normals"
 {
     Properties
     {
-        //_MainTex ("Texture", 2D) = "white" {}
         _Color ("Main Color", Color) = (1,1,1,1)
     }
     
@@ -46,7 +45,6 @@ Shader "Demo/Normals"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                //o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.worldNormal = UnityObjectToWorldNormal(v.normal);
                 return o;
             }
@@ -56,7 +54,7 @@ Shader "Demo/Normals"
             {
                 fixed4 col = 0;
                 //normal -1.0 to +1.0
-                col.rgb = i.worldNormal * 0.5 + 0.25 + _Color.rgb * 0.25;
+                col.rgb = i.worldNormal * 0.5 + _Color.rgb * 0.5;
                 return col;
             }
             ENDCG

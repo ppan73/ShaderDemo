@@ -28,9 +28,6 @@ public class ButtonsPanel : MonoBehaviour
     
     private Vector3 _initialCameraPosition;
     private Quaternion _initialCameraRotation;
-
-    private const string SHADER_KEY = "CurrentShaderIndex";
-    private const string MODEL_KEY = "CurrentModelIndex";
     
     private void Awake()
     {
@@ -54,8 +51,8 @@ public class ButtonsPanel : MonoBehaviour
             _modelList.Add(modelsFolder.GetChild(i).gameObject);
         }
 
-        _currentShaderIndex = PlayerPrefs.GetInt(SHADER_KEY, 0);
-        _currentModelIndex = PlayerPrefs.GetInt(MODEL_KEY, 0);
+        _currentShaderIndex = 0;
+        _currentModelIndex = 0;
         SetShader(_currentShaderIndex);
         ShowModel(_currentModelIndex);
     }
@@ -67,7 +64,6 @@ public class ButtonsPanel : MonoBehaviour
         {
             _currentModelIndex = 0;
         }
-        PlayerPrefs.SetInt(MODEL_KEY, _currentModelIndex);
 
         ShowModel(_currentModelIndex);
     }
@@ -78,7 +74,6 @@ public class ButtonsPanel : MonoBehaviour
         {
             _currentShaderIndex = 0;
         }
-        PlayerPrefs.SetInt(SHADER_KEY, _currentShaderIndex);
 
         SetShader(_currentShaderIndex);
     }
@@ -114,10 +109,12 @@ public class ButtonsPanel : MonoBehaviour
     {
         if (computeShaderDemo.gameObject.activeSelf)
         {
+            modelsFolder.gameObject.SetActive(true);
             computeShaderDemo.Kill();
         }
         else
         {
+            modelsFolder.gameObject.SetActive(false);
             computeShaderDemo.Init();
         }
     }

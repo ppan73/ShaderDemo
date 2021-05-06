@@ -5,15 +5,16 @@
 RWTexture2D<float4> Result;
 uniform float Time;
 
+//total threads = x*y*z
 [numthreads(8,8,1)]
 void Demo (uint3 id : SV_DispatchThreadID)
 {    
     float speed = 2;
     float pi = 3.14;
 
-    float rTime = sin(speed*Time);
-    float gTime = cos(speed*Time);
-    float bTime = sin(speed*Time + pi);
+    float rTime = (sin(speed*Time) + 1) / 2;
+    float gTime = (cos(speed*Time) + 1) / 2;
+    float bTime = (sin(speed*Time + pi) + 1) / 2;
     
     Result[id.xy] = float4(rTime, gTime, bTime, 1);
 }

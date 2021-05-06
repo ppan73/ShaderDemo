@@ -53,13 +53,13 @@ Shader "Demo/SkyReflection Per Pixel"
             {
                 // sample the normal map, and decode from the Unity encoding
                 half3 tnormal = UnpackNormal(tex2D(_BumpMap, i.uv));
+                
                 // transform normal from tangent to world space
                 half3 worldNormal;
                 worldNormal.x = dot(i.tspace0, tnormal);
                 worldNormal.y = dot(i.tspace1, tnormal);
                 worldNormal.z = dot(i.tspace2, tnormal);
 
-                // rest the same as in previous shader
                 half3 worldViewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
                 half3 worldRefl = reflect(-worldViewDir, worldNormal);
                 half4 skyData = UNITY_SAMPLE_TEXCUBE(unity_SpecCube0, worldRefl);

@@ -55,18 +55,20 @@
      <Compile Include="Assets\Scripts\ButtonsPanel.cs" />
      <Compile Include="Assets\Scripts\ComputeShader\ComputeShaderDemo.cs" />
      <Compile Include="Assets\Scripts\ViewDragger.cs" />
-     <None Include="Assets\Resources\Shaders\Triplanar.shader" />
+     <None Include="Assets\Resources\OtherShaders\Triplanar.shader" />
      <None Include="Assets\AmplifyShaders\Amplify.shader" />
-     <None Include="Assets\Resources\Shaders\Normals.shader" />
-     <None Include="Assets\Resources\Shaders\SimpleDiffuse.shader" />
+     <None Include="Assets\Resources\Shaders\1Normals.shader" />
+     <None Include="Assets\Resources\OtherShaders\VideoBiPlanarYUVGammaShader.shader" />
+     <None Include="Assets\Resources\OtherShaders\BrushStrokeShader.shader" />
+     <None Include="Assets\Resources\Shaders\2SimpleDiffuse.shader" />
      <None Include="Assets\Scripts\ComputeShader\ComputeShader.compute" />
-     <None Include="Assets\Resources\Shaders\Tesselation.shader" />
-     <None Include="Assets\Resources\Shaders\CheckerBoard.shader" />
-     <None Include="Assets\Resources\Shaders\Amplify2.shader" />
-     <None Include="Assets\Resources\Shaders\PhongTessalation.shader" />
+     <None Include="Assets\Resources\Shaders\5Tesselation.shader" />
+     <None Include="Assets\Resources\Shaders\3CheckerBoard.shader" />
+     <None Include="Assets\Resources\Shaders\6Amplify2.shader" />
+     <None Include="Assets\Resources\OtherShaders\PhongTessalation.shader" />
      <None Include="Assets\Scripts\ComputeShader\Random.cginc" />
      <None Include="Assets\SkySerie Freebie\Hdri setup.txt" />
-     <None Include="Assets\Resources\Shaders\ReflectionPerPixel.shader" />
+     <None Include="Assets\Resources\Shaders\4ReflectionPerPixel.shader" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.2.2f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

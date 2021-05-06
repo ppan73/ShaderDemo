@@ -16,22 +16,17 @@ public class ComputeShaderDemo : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    struct VecMatPair
-    {
-        public Vector3 point;
-        public Matrix4x4 matrix;
-    }
-
     public void Init()
     {
         gameObject.SetActive(true);
         
+        //Get the compute shader kernel
         kernelHandle = Shader.FindKernel("Demo");
 
+        //Create texture
         tex = new RenderTexture(256,256,24);
         tex.enableRandomWrite = true;
         tex.Create();
-
     }
 
     public void Kill()
@@ -46,10 +41,5 @@ public class ComputeShaderDemo : MonoBehaviour
         Shader.Dispatch(kernelHandle, 256 / 8, 256 / 8, 1);
 
         meshRenderer.material.mainTexture = tex;
-    }
-
-    void OnDestroy()
-    {
-        //resultBuffer.Dispose();
     }
 }
